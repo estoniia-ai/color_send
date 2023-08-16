@@ -25,7 +25,32 @@ canvas.addEventListener('click', function(event) {
     drawIndicator(x, y);
 
     // Send the color choice to the backend
-    // Update the frontend based on the response
+    function selectColor(event) {
+        const color = event.target.value;
+        const userId = "some_unique_user_id";  // You'll need a way to identify users uniquely
+    
+        // Send the color choice to the backend
+        fetch('https://829tze0ts0.execute-api.eu-north-1.amazonaws.com/live/save-color', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                userId: userId,
+                color: color
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data.message);
+            // Update the frontend based on the response
+            document.getElementById('chosenColor').innerText = color;
+            drawIndicator(event.offsetX, event.offsetY);
+        })
+        .catch(error => {
+            console.error('Error saving color choice:', error);
+        });
+    }
 });
 
 function drawIndicator(x, y) {
