@@ -1,0 +1,16 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin-top: 50px;
+}
+
+#colorWheel {
+    border-radius: 50%;
+    cursor: pointer;
+    display: block;
+    margin: 0 auto;
+}
+
+#userChoice {
+    margin-top: 20px;
+}
