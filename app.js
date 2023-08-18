@@ -54,6 +54,9 @@ function selectColor(rgba) {
         console.log(data.message);
         // Update the frontend based on the response
         document.getElementById('chosenColor').innerText = rgba;  // Use rgba here
+
+        // Update the background color in real-time
+        updateAppBackgroundColor(rgba);
     })
     .catch(error => {
         console.error("Error sending color choice:", error);  // This will log any fetch-related errors
@@ -70,4 +73,8 @@ function drawIndicator(x, y) {
     ctx.arc(x, y, indicatorRadius, 0, 2 * Math.PI, false);
     ctx.fillStyle = 'black';  // Color of the indicator
     ctx.fill();
+}
+
+function updateAppBackgroundColor(color) {
+    document.body.style.backgroundColor = color;
 }
