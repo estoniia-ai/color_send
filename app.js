@@ -25,39 +25,39 @@ canvas.addEventListener('click', function(event) {
     // Draw the indicator on the canvas
     drawIndicator(x, y);
 
-    // Send the color choice to the backend
-    function selectColor(event) {
-        const color = event.target.value;
-        const userId = "some_unique_user_id";  // You'll need a way to identify users uniquely
-    
-        console.log("Sending color choice to backend:", color);  // For debugging purposes
-
-        // Send the color choice to the backend
-        fetch('https://829tze0ts0.execute-api.eu-north-1.amazonaws.com/live/save-color', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                userId: userId,
-                color: color
-            })
-        })
-        .then(response => {
-            console.log("Response received:", response);  // For debugging purposes
-            return response.json();
-        })
-        .then(data => {
-            console.log(data.message);
-            // Update the frontend based on the response
-            document.getElementById('chosenColor').innerText = color;
-            drawIndicator(event.offsetX, event.offsetY);
-        })
-        .catch(error => {
-            console.error("Error sending color choice:", error);  // This will log any fetch-related errors
-        });
-    }
+    // Call the selectColor function to send the color choice to the backend
+    selectColor(rgba);  // Pass the rgba value to the function
 });
+
+function selectColor(rgba) {
+    const userId = "some_unique_user_id";  // You'll need a way to identify users uniquely
+
+    console.log("Sending color choice to backend:", rgba);  // Use rgba here
+
+    // Send the color choice to the backend
+    fetch('https://829tze0ts0.execute-api.eu-north-1.amazonaws.com/live/save-color', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            userId: userId,
+            color: rgba  // Use rgba here
+        })
+    })
+    .then(response => {
+        console.log("Response received:", response);  // For debugging purposes
+        return response.json();
+    })
+    .then(data => {
+        console.log(data.message);
+        // Update the frontend based on the response
+        document.getElementById('chosenColor').innerText = rgba;  // Use rgba here
+    })
+    .catch(error => {
+        console.error("Error sending color choice:", error);  // This will log any fetch-related errors
+    });
+}
 
 function drawIndicator(x, y) {
     // First, redraw the color wheel to clear any previous indicators
