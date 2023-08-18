@@ -43,9 +43,10 @@ canvas.addEventListener('click', function(event) {
                 color: color
             })
         })
-        .then(response => response.json())
-        console.log("Response received:", response);  // For debugging purposes
-
+        .then(response => {
+            console.log("Response received:", response);  // For debugging purposes
+            return response.json();
+        })
         .then(data => {
             console.log(data.message);
             // Update the frontend based on the response
