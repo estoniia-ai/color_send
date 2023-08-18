@@ -35,7 +35,7 @@ function selectColor(rgba) {
     console.log("Sending color choice to backend:", rgba);  // Use rgba here
 
     // Send the color choice to the backend
-    fetch('https://829tze0ts0.execute-api.eu-north-1.amazonaws.com/live/save-color', {
+    fetch('https://9g5mygrkq9.execute-api.eu-north-1.amazonaws.com/live/save-color', {
         method: 'POST',
         mode: 'cors',
         headers: {
