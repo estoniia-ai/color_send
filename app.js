@@ -9,6 +9,7 @@ image.onload = function() {
 image.src = 'color_wheel.png';  // Use a color wheel image
 
 canvas.addEventListener('click', function(event) {
+    console.log("Canvas clicked!"); // For debugging purposes
     const x = event.offsetX;
     const y = event.offsetY;
     const pixel = ctx.getImageData(x, y, 1, 1).data;
@@ -29,6 +30,8 @@ canvas.addEventListener('click', function(event) {
         const color = event.target.value;
         const userId = "some_unique_user_id";  // You'll need a way to identify users uniquely
     
+        console.log("Sending color choice to backend:", color);  // For debugging purposes
+
         // Send the color choice to the backend
         fetch('https://829tze0ts0.execute-api.eu-north-1.amazonaws.com/live/save-color', {
             method: 'POST',
@@ -41,6 +44,8 @@ canvas.addEventListener('click', function(event) {
             })
         })
         .then(response => response.json())
+        console.log("Response received:", response);  // For debugging purposes
+
         .then(data => {
             console.log(data.message);
             // Update the frontend based on the response
@@ -48,7 +53,7 @@ canvas.addEventListener('click', function(event) {
             drawIndicator(event.offsetX, event.offsetY);
         })
         .catch(error => {
-            console.error('Error saving color choice:', error);
+            console.error("Error sending color choice:", error);  // This will log any fetch-related errors
         });
     }
 });
